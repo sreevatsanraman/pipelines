@@ -1,0 +1,48 @@
+{
+  "name": "Spanner",
+  "appVersion": "3aa402e7-7ceb-11ee-9069-fa570e907fe8",
+  "description": "Data Pipeline Application",
+  "change": {
+    "author": "cdap",
+    "creationTimeMillis": 1699306023812,
+    "latest": true
+  },
+  "configuration": "{\"resources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"driverResources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"connections\":[{\"from\":\"Spanner\",\"to\":\"Wrangler\"},{\"from\":\"Wrangler\",\"to\":\"BigQuery\"}],\"postActions\":[],\"properties\":{},\"processTimingEnabled\":true,\"stageLoggingEnabled\":true,\"stages\":[{\"name\":\"Spanner\",\"plugin\":{\"name\":\"Spanner\",\"type\":\"batchsource\",\"label\":\"Spanner\",\"artifact\":{\"name\":\"google-cloud\",\"version\":\"0.22.1\",\"scope\":\"SYSTEM\"},\"properties\":{\"database\":\"ads\",\"instance\":\"demo\",\"useConnection\":\"true\",\"connection\":\"${conn(Cloud Spanner Default)}\",\"table\":\"impressions\",\"referenceName\":\"demo.ads.impressions\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"outputSchema\\\",\\\"fields\\\":[{\\\"name\\\":\\\"landing_page_url_id\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"referrer_url\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"advertiser_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"timestamp\\\",\\\"type\\\":[{\\\"type\\\":\\\"long\\\",\\\"logicalType\\\":\\\"timestamp-micros\\\"},\\\"null\\\"]},{\\\"name\\\":\\\"advertiser\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"key\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]}]}\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"outputSchema\\\",\\\"fields\\\":[{\\\"name\\\":\\\"landing_page_url_id\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"referrer_url\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"advertiser_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"timestamp\\\",\\\"type\\\":[{\\\"type\\\":\\\"long\\\",\\\"logicalType\\\":\\\"timestamp-micros\\\"},\\\"null\\\"]},{\\\"name\\\":\\\"advertiser\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"key\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]}]}\",\"id\":\"Spanner\"},{\"name\":\"Wrangler\",\"plugin\":{\"name\":\"Wrangler\",\"type\":\"transform\",\"label\":\"Wrangler\",\"artifact\":{\"name\":\"wrangler-transform\",\"version\":\"4.9.1\",\"scope\":\"SYSTEM\"},\"properties\":{\"directives\":\"filter-rows-on condition-true referrer_url \\u003d\\u003d null || referrer_url \\u003d~ \\\"^\\\\W*$\\\"\\nset-type :landing_page_url_id integer \",\"field\":\"*\",\"precondition\":\"false\",\"workspaceId\":\"00192aae-9ef0-4db3-b98a-a21b137cc12c\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"record\\\",\\\"fields\\\":[{\\\"name\\\":\\\"landing_page_url_id\\\",\\\"type\\\":[\\\"int\\\",\\\"null\\\"]},{\\\"name\\\":\\\"referrer_url\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"advertiser_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"timestamp\\\",\\\"type\\\":[{\\\"type\\\":\\\"long\\\",\\\"logicalType\\\":\\\"timestamp-micros\\\"},\\\"null\\\"]},{\\\"name\\\":\\\"advertiser\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"key\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]}]}\",\"on-error\":\"fail-pipeline\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"record\\\",\\\"fields\\\":[{\\\"name\\\":\\\"landing_page_url_id\\\",\\\"type\\\":[\\\"int\\\",\\\"null\\\"]},{\\\"name\\\":\\\"referrer_url\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"advertiser_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"timestamp\\\",\\\"type\\\":[{\\\"type\\\":\\\"long\\\",\\\"logicalType\\\":\\\"timestamp-micros\\\"},\\\"null\\\"]},{\\\"name\\\":\\\"advertiser\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"key\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]}]}\",\"inputSchema\":[{\"name\":\"Spanner\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"outputSchema\\\",\\\"fields\\\":[{\\\"name\\\":\\\"landing_page_url_id\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"referrer_url\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"advertiser_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"timestamp\\\",\\\"type\\\":[{\\\"type\\\":\\\"long\\\",\\\"logicalType\\\":\\\"timestamp-micros\\\"},\\\"null\\\"]},{\\\"name\\\":\\\"advertiser\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"key\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]}]}\"}],\"id\":\"Wrangler\"},{\"name\":\"BigQuery\",\"plugin\":{\"name\":\"BigQueryTable\",\"type\":\"batchsink\",\"label\":\"BigQuery\",\"artifact\":{\"name\":\"google-cloud\",\"version\":\"0.22.1\",\"scope\":\"SYSTEM\"},\"properties\":{\"useConnection\":\"false\",\"project\":\"auto-detect\",\"serviceAccountType\":\"filePath\",\"serviceFilePath\":\"auto-detect\",\"dataset\":\"demos\",\"table\":\"ads\",\"operation\":\"insert\",\"truncateTable\":\"false\",\"allowSchemaRelaxation\":\"false\",\"location\":\"US\",\"createPartitionedTable\":\"false\",\"partitioningType\":\"TIME\",\"partitionFilterRequired\":\"false\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"record\\\",\\\"fields\\\":[{\\\"name\\\":\\\"landing_page_url_id\\\",\\\"type\\\":[\\\"int\\\",\\\"null\\\"]},{\\\"name\\\":\\\"referrer_url\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"advertiser_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"timestamp\\\",\\\"type\\\":[{\\\"type\\\":\\\"long\\\",\\\"logicalType\\\":\\\"timestamp-micros\\\"},\\\"null\\\"]},{\\\"name\\\":\\\"advertiser\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"key\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]}]}\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"record\\\",\\\"fields\\\":[{\\\"name\\\":\\\"landing_page_url_id\\\",\\\"type\\\":[\\\"int\\\",\\\"null\\\"]},{\\\"name\\\":\\\"referrer_url\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"advertiser_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"timestamp\\\",\\\"type\\\":[{\\\"type\\\":\\\"long\\\",\\\"logicalType\\\":\\\"timestamp-micros\\\"},\\\"null\\\"]},{\\\"name\\\":\\\"advertiser\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"key\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]}]}\",\"inputSchema\":[{\"name\":\"Wrangler\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"record\\\",\\\"fields\\\":[{\\\"name\\\":\\\"landing_page_url_id\\\",\\\"type\\\":[\\\"int\\\",\\\"null\\\"]},{\\\"name\\\":\\\"referrer_url\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"advertiser_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign_id\\\",\\\"type\\\":[\\\"long\\\",\\\"null\\\"]},{\\\"name\\\":\\\"timestamp\\\",\\\"type\\\":[{\\\"type\\\":\\\"long\\\",\\\"logicalType\\\":\\\"timestamp-micros\\\"},\\\"null\\\"]},{\\\"name\\\":\\\"advertiser\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"campaign\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]},{\\\"name\\\":\\\"key\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]}]}\"}],\"id\":\"BigQuery\"}],\"schedule\":\"0 1 */1 * *\",\"engine\":\"spark\",\"numOfRecordsPreview\":100.0,\"rangeRecordsPreview\":{\"min\":1.0,\"max\":\"5000\"},\"maxConcurrentRuns\":1.0}",
+  "datasets": [],
+  "programs": [
+    {
+      "type": "Spark",
+      "app": "Spanner",
+      "name": "phase-1",
+      "description": "Sources \u0027Spanner\u0027 to sinks \u0027BigQuery\u0027."
+    },
+    {
+      "type": "Workflow",
+      "app": "Spanner",
+      "name": "DataPipelineWorkflow",
+      "description": "Data Pipeline Workflow"
+    }
+  ],
+  "plugins": [
+    {
+      "id": "BigQuery",
+      "name": "BigQueryTable",
+      "type": "batchsink"
+    },
+    {
+      "id": "Wrangler",
+      "name": "Wrangler",
+      "type": "transform"
+    },
+    {
+      "id": "Spanner",
+      "name": "Spanner",
+      "type": "batchsource"
+    }
+  ],
+  "artifact": {
+    "name": "cdap-data-pipeline",
+    "version": "6.9.1",
+    "scope": "SYSTEM"
+  }
+}
